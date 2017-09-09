@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  Qusing2Stacks.cpp
+ *       Filename:  Qw2Stacks.cpp
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  09/09/2017 12:43:05
+ *        Created:  09/09/2017 12:46:10
  *       Revision:  none
  *       Compiler:  gcc
  *
