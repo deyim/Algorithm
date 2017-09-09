@@ -1,20 +1,3 @@
-/*
- * =====================================================================================
- *
- *       Filename:  Qw2Stacks.cpp
- *
- *    Description:  
- *
- *        Version:  1.0
- *        Created:  09/09/2017 12:46:10
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  YOUR NAME (), 
- *   Organization:  
- *
- * =====================================================================================
- */
 //
 //  main.cpp
 //  tmp
@@ -41,18 +24,17 @@ public:
 	}
 	
 	void pop() {
-		int tmp;
-		if(new_top.empty()){
-			while(!old_top.empty()){
-				tmp = old_top.top();
-				old_top.pop();
-				new_top.push(tmp);
-			}
-		}
+		reverse();
 		new_top.pop();
 	}
 	
 	int front() {
+		reverse();
+		int top = new_top.top();
+		return top;
+	}
+	
+	void reverse(){
 		int tmp;
 		if(new_top.empty()){
 			while(!old_top.empty()){
@@ -61,8 +43,6 @@ public:
 				new_top.push(tmp);
 			}
 		}
-		int top = new_top.top();
-		return top;
 	}
 };
 
