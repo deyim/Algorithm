@@ -1,22 +1,27 @@
+//https://www.hackerrank.com/challenges/ctci-connected-cell-in-a-grid/problem
+
 #include <iostream>
 #include <vector>
 #include <stack>
 using namespace std;
 int Cnt = 0;
 
-void dfs(vector< vector<int> > grid, int m , int n){
+void dfs(vector< vector<int> > &grid, int m , int n){
     //int Cnt = 0 ;
     for(int i = -1; i <= 1 ; i++){
         for(int j = -1 ; j <= 1; j++){
             if(i == 0 && j == 0) 
                 continue;
-            else if(m+i >= 0 && n+j >= 0 && grid[m+i][n+j]){
+            else if(m+i < 0 && n+j < 0 && m+i>=grid.size())
+                continue;
+            else if(n+j >= grid[m+i].size())
+                continue;
+            else if(grid[m+i][n+j]==1){
                 Cnt++; grid[m+i][n+j] = 0;
                 dfs(grid, m+i, n+j);
             }
         }
-    }
-        
+    }        
 }
 
 int get_biggest_region(vector< vector<int> > grid) {
@@ -25,8 +30,10 @@ int get_biggest_region(vector< vector<int> > grid) {
 
     for(int i = 0 ; i < grid.size(); i++){
         for(int j = 0 ; j < grid[i].size(); j++){
-            if(grid[i][j] != 0 )
+            if(grid[i][j] != 0 ){
+                grid[i][j]=0; Cnt++;
                 dfs(grid, i, j);
+            }
             if(maxCnt < Cnt)
                 maxCnt = Cnt;
             Cnt = 0;
