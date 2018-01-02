@@ -28,7 +28,7 @@ int main(){
 		d[1][i] = 1;
 
 	for(int i = 2; i <= N ; i++){
-		for(int j = 0; j <= 9ㅈ ; j++){
+		for(int j = 0; j <= 9 ; j++){
 			if(j-1 >= 0) d[i][j] += d[i-1][j-1];
 			if(j+1 <= 9) d[i][j] += d[i-1][j+1];
 			d[i][j] %= mod;
