@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <stdlib.h>
 #include <vector>
+//#define DEBUG
 using namespace std;
 int disSet[1001] = {1001,};
 
@@ -26,7 +27,6 @@ void _union(int a, int b){
 	int rootB = 0;
 	if(disSet[b]!= 0)
 	 	rootB = find(b);
-	printf("root %d %d\n", rootA, rootB);
 	if(disSet[a] == disSet[b])
 		return;
 	else{
@@ -41,20 +41,27 @@ int main(){
 	int visited = 0, finalCost=0;
 	
 	cin >> n >> m >> k;
+
 	int costs[n+1][n+1];
 	int plant[k+1];
+	bool chkVisit[n+1];
 	vector<int> visitedV;
 	visited = k;
+
+	
+	for(int i = 1 ; i <= n ; i++){
+		chkVisit[i] = false;
+		for(int j = 1; j <= n ; j++){
+			costs[i][j] = 0;
+		}
+	}
+
 	
 	for(int i = 1 ; i <= k ; i++){
 		scanf("%d", &plant[i]);
 		makeSet(plant[i]);
 		visitedV.push_back(plant[i]);
-	}
-	for(int i = 1 ; i <= n ; i++){
-		for(int j = 1; j <= n ; j++){
-			costs[i][j] = 0;
-		}
+		chkVisit[plant[i]] = true;
 	}
 
 	for(int i = 0 ; i < m ; i++){
@@ -62,6 +69,9 @@ int main(){
 		costs[from][to] = cost;
 		costs[to][from] = cost;
 	}
+
+#ifdef DEBUG	
+
 	printf("\n");
 	for(int i = 1 ; i <= n ; i++){
 		for(int j = 1 ; j <= n ; j++){
@@ -71,28 +81,53 @@ int main(){
 	}
 
 
+#endif
+
+
 	while(visited < n){
 		int minEdge=100001;
-		int tarPlant = 0; int tarCity = 0;
+		int tarPlant = 0; int tarCity = 0; int tarSrc=0;
 
 		vector<int>::iterator it;
+
+#ifdef DEBUG
+
+		cout << "visitedV: "; 
+		for(it = visitedV.begin() ; it < visitedV.end() ; it++)
+			cout << *it << " ";
+		cout << endl;
+
+#endif
+
 		for(it = visitedV.begin() ; it < visitedV.end() ; it++){
 			for(int i = 1 ; i <= n ; i++){
-				if(costs[*it][i] && minEdge > costs[*it][i]){
-					printf("i %d, costs[%d][%d]: %d\n", i, *it, i, costs[*it][i]);
+				//printf(" *it == i %d %d / chkVisit[i] %d /  costs[*it][i] %d\n", *it, i, chkVisit[i], costs[*it][i]);
+				if(*it == i || chkVisit[i] == true || costs[*it][i] ==0)
+					continue;
+				//printf("it: %d, i: %d\n", *it, i);
+				if(minEdge > costs[*it][i]){
+				//	printf("costs[%d][%d]: %d\n",*it, i, costs[*it][i]);
 					minEdge = costs[*it][i];
 					tarPlant = find(*it);
+					tarSrc = *it;
 					tarCity = i;
+					
 				}
 			}
 		}
-		printf("add %d %d\n", tarPlant, tarCity);
-			for(int i = 1 ; i < 10 ; i++) 
-				printf("%d ",disSet[i]);
-		printf("\n");
+
+		finalCost += costs[tarSrc][tarCity];
 		_union(tarPlant, tarCity);
 		visitedV.push_back(tarCity);
-		visited++;
+		visited++;		
+		//printf("costs[%d][%d] => final: %d\n", tarSrc, tarCity, finalCost);
+		chkVisit[tarCity] = true;
+#ifdef DEBUG
+		printf("add %d %d\n", tarPlant, tarCity);
+		for(int i = 1 ; i < 10 ; i++) 
+			printf("%d ",disSet[i]);
+		printf("\n\n");
+#endif
 	}
 
 	cout << finalCost <<endl;
