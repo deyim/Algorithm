@@ -55,7 +55,6 @@ int main(){
 			costs[i][j] = 0;
 		}
 	}
-
 	
 	for(int i = 1 ; i <= k ; i++){
 		scanf("%d", &plant[i]);
@@ -69,7 +68,7 @@ int main(){
 		costs[from][to] = cost;
 		costs[to][from] = cost;
 	}
-
+/*
 #ifdef DEBUG	
 
 	printf("\n");
@@ -82,14 +81,14 @@ int main(){
 
 
 #endif
-
+*/
 
 	while(visited < n){
 		int minEdge=100001;
 		int tarPlant = 0; int tarCity = 0; int tarSrc=0;
 
 		vector<int>::iterator it;
-
+/*
 #ifdef DEBUG
 
 		cout << "visitedV: "; 
@@ -98,7 +97,7 @@ int main(){
 		cout << endl;
 
 #endif
-
+*/
 		for(it = visitedV.begin() ; it < visitedV.end() ; it++){
 			for(int i = 1 ; i <= n ; i++){
 				//printf(" *it == i %d %d / chkVisit[i] %d /  costs[*it][i] %d\n", *it, i, chkVisit[i], costs[*it][i]);
@@ -122,12 +121,14 @@ int main(){
 		visited++;		
 		//printf("costs[%d][%d] => final: %d\n", tarSrc, tarCity, finalCost);
 		chkVisit[tarCity] = true;
+/*
 #ifdef DEBUG
 		printf("add %d %d\n", tarPlant, tarCity);
 		for(int i = 1 ; i < 10 ; i++) 
 			printf("%d ",disSet[i]);
 		printf("\n\n");
 #endif
+*/
 	}
 
 	cout << finalCost <<endl;
