@@ -17,5 +17,10 @@ while N != 0:
 	M = int(input())
 	print(getFibo(M))
 
-#1 2 3 4 5 6 7  8  9  10  11
-#1 1 2 3 5 8 13 21 34 55  89 144 
+'''
+modulo by 1000000007
+In most of the programming competitions, 
+problems are required to answer the result in 10^9+7 modulo. 
+The reason behind this is to have problems for large integers 
+so that only efficient algorithms can solve them in allowed limited time.
+'''
