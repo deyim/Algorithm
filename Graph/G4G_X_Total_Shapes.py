@@ -2,8 +2,6 @@
 	Type: BFS
 	URL: https://practice.geeksforgeeks.org/problems/x-total-shapes/0
 '''
-
-
 def BFS(i,j,field,row,col):
 	q = []
 	move = [(-1,0),(0,-1),(1,0),(0,1)]
@@ -27,14 +25,12 @@ while T:
 	field = []
 	inputString = input().split()
 
+	## 이차원배열로 만드는 거 힘들었음..ㅜㅡㅜ
 	for i in range(row):
 		myList = inputString[i]
 		myList = [i for i in myList]
 		field.append(myList)
 
-#	for i in field:
-#		print(i)
-	
 	region = 0
 	for i in range(row):
 		for j in range(col):
@@ -43,12 +39,6 @@ while T:
 				region += 1
 
 	print(region)
-
-
-
-	
-
-
 
 
 ''''
