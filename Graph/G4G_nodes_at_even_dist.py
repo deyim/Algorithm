@@ -44,6 +44,6 @@ while m:
 		else: odd += 1
 
 	pair = int(even*(even-1)/2 + odd*(odd-1)/2)
-
+	print(g.depth)
 	print(pair)	
 	m -= 1
