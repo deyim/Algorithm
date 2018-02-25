@@ -28,10 +28,10 @@ while T:
 	Targ = N
 
 	for i in minus:
-		minee = int(N/i)
+		minee = int(N//i)
 		Targ -= minee
 	for j in plus:
-		plee = int(N/j)
+		plee = int(N//j)
 		Targ += plee
 
 	print(Targ)
